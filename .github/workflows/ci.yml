@@ -6,7 +6,7 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the "stemdo" branch
   push:
-    branches: [ "stemdo" ]
+    branches: [ "stemdo", "ci" ]
   pull_request:
     branches: [ "stemdo" ]
 
@@ -29,4 +29,6 @@ jobs:
         run: |
           npm install remark-cli remark-preset-lint-consistent
           npx remark . --use remark-preset-lint-consistent --frail
-
+      - name: Error Handler
+        if: ${{ !success() }}
+        run: npm fund
