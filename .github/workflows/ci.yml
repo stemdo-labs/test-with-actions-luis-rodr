@@ -27,8 +27,12 @@ jobs:
       # Esto va a dar error porque falta npm y npx en la máquina?
       - name: Run markdown lint
         run: |
+          npm update
+          npm install
           npm install remark-cli remark-preset-lint-consistent
           npx remark . --use remark-preset-lint-consistent --frail
       - name: Error Handler
         if: ${{ !success() }}
         run: npm fund
+          
+
